@@ -1,31 +1,23 @@
-import { useContext } from "react";
-import { InvoiceContext } from "../context/InvoiceContext";
+import { useState } from "react";
+import InvoiceForm from "./InvoiceForm";
 
 const Header = () => {
-  const { addInvoice } = useContext(InvoiceContext);
-
-  const handleAdd = () => {
-    const newInvoice = {
-      id: Math.random().toString(36).substring(2, 7).toUpperCase(),
-      client: "New Client",
-      date: "25 Aug 2026",
-      amount: 500,
-      status: "Draft",
-    };
-
-    addInvoice(newInvoice);
-  };
+  const [showForm, setShowForm] = useState(false);
 
   return (
-    <header className="header">
-      <div>
+    <>
+      <header className="header">
         <h1>Invoices</h1>
-      </div>
 
-      <button onClick={handleAdd} className="new-btn">
-        + New Invoice
-      </button>
-    </header>
+        <button onClick={() => setShowForm(true)}>
+          + New Invoice
+        </button>
+      </header>
+
+      {showForm && (
+        <InvoiceForm onClose={() => setShowForm(false)} />
+      )}
+    </>
   );
 };
 

@@ -1,9 +1,9 @@
-import React from 'react'
-
-const StatusBadge = () => {
+const StatusBadge = ({ status }) => {
   return (
-    <div>StatusBadge</div>
-  )
-}
+    <span className={`status ${status.toLowerCase()}`}>
+      {status}
+    </span>
+  );
+};
 
-export default StatusBadge
+export default StatusBadge;
