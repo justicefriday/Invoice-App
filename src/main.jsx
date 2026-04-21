@@ -1,16 +1,15 @@
-// ============================================================
-//  main.jsx
-//  The entry point. React mounts App into <div id="root">
-//  which lives in index.html (Vite creates this for you).
-// ============================================================
+
 
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
+import { InvoiceProvider } from "./context/InvoiceContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <InvoiceProvider>
+      <App />
+    </InvoiceProvider>
   </React.StrictMode>
 );
