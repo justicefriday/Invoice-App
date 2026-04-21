@@ -1,0 +1,245 @@
+/* ============================================================
+   INDEX.CSS
+   - CSS reset
+   - Design tokens (colours, fonts, spacing) as CSS variables
+   - Light theme (default)
+   - Dark theme (applied via data-theme="dark" on <html>)
+   - Global base styles
+   ============================================================ */
+
+/* ── Google Font ── */
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;700&display=swap");
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================
+   LIGHT THEME (default)
+   ============================================================ */
+:root {
+  /* Brand */
+  --purple:        #7C5DFA;
+  --purple-light:  #9277FF;
+  --red:           #EC5757;
+  --red-light:     #FF9797;
+
+  /* Status colours */
+  --paid-bg:       rgba(51, 214, 159, 0.06);
+  --paid-dot:      #33D69F;
+  --pending-bg:    rgba(255, 143, 0, 0.06);
+  --pending-dot:   #FF8F00;
+  --draft-bg:      rgba(55, 59, 83, 0.06);
+  --draft-dot:     #373B53;
+
+  /* Layout */
+  --bg:            #F8F8FB;       /* page background */
+  --card:          #FFFFFF;       /* card / form background */
+  --sidebar:       #373B53;       /* left sidebar */
+
+  /* Text */
+  --text-primary:  #0C0E16;
+  --text-muted:    #888EB0;
+  --text-heading:  #7E88C3;       /* field labels */
+
+  /* Borders & inputs */
+  --border:        #DFE3FA;
+  --input-bg:      #FFFFFF;
+
+  /* Font */
+  --font: "League Spartan", sans-serif;
+
+  /* Sizes */
+  --sidebar-w:     103px;         /* desktop sidebar width */
+  --radius:        8px;
+  --radius-lg:     20px;
+}
+
+/* ============================================================
+   DARK THEME
+   Applied by setting data-theme="dark" on <html>
+   ============================================================ */
+[data-theme="dark"] {
+  --bg:            #141625;
+  --card:          #1E2139;
+  --sidebar:       #1E2139;
+
+  --text-primary:  #FFFFFF;
+  --text-muted:    #DFE3FA;
+  --text-heading:  #DFE3FA;
+
+  --border:        #252945;
+  --input-bg:      #252945;
+
+  /* Dark theme draft dot is lighter so it's visible */
+  --draft-bg:      rgba(223, 227, 250, 0.06);
+  --draft-dot:     #DFE3FA;
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+html {
+  font-family: var(--font);
+  font-size: 12px;               /* base — headings/text scale from here */
+  background: var(--bg);
+  color: var(--text-primary);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+body {
+  min-height: 100vh;
+  /* On desktop: push content right of the sidebar */
+  padding-left: 0;
+}
+
+/* Smooth theme transitions on all common properties */
+*, *::before, *::after {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
+}
+
+img, svg { display: block; }
+button  { cursor: pointer; font-family: var(--font); }
+input, select, textarea { font-family: var(--font); }
+a { text-decoration: none; color: inherit; }
+ul, ol { list-style: none; }
+
+/* ============================================================
+   LAYOUT HELPERS  (used by multiple pages)
+   ============================================================ */
+
+/* The main content area sits beside the sidebar on desktop */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  .app-layout {
+    flex-direction: row;
+  }
+}
+
+/* Content area */
+.main-content {
+  flex: 1;
+  padding: 32px 24px;
+  max-width: 780px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    padding: 56px 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .main-content {
+    padding: 72px 48px;
+  }
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
+.text-muted    { color: var(--text-muted); }
+.text-heading  { color: var(--text-heading); }
+.text-purple   { color: var(--purple); }
+.text-red      { color: var(--red); }
+.fw-bold       { font-weight: 700; }
+.fw-medium     { font-weight: 500; }
+
+/* ============================================================
+   FORM FIELD SHARED STYLES
+   (used inside InvoiceForm)
+   ============================================================ */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-heading);
+}
+
+.field-label.error {
+  color: var(--red);
+}
+
+.field-input {
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 700;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.field-input:focus {
+  border-color: var(--purple);
+}
+
+.field-input.error {
+  border-color: var(--red);
+}
+
+/* ============================================================
+   BUTTON SHARED STYLES
+   Each button variant extends .btn
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 24px;
+  border-radius: 99px;           /* pill shape */
+  border: none;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.25px;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+}
+
+.btn:hover { opacity: 0.85; }
+.btn:active { transform: scale(0.98); }
+
+/* Variants */
+.btn-purple   { background: var(--purple);  color: #fff; }
+.btn-purple:hover { background: var(--purple-light); opacity: 1; }
+
+.btn-dark     { background: #373B53;  color: var(--text-muted); }
+.btn-dark:hover { background: #0C0E16; opacity: 1; }
+
+.btn-light    { background: #F9FAFE; color: var(--text-heading); }
+.btn-light:hover { background: var(--border); opacity: 1; }
+
+.btn-red      { background: var(--red); color: #fff; }
+.btn-red:hover { background: var(--red-light); opacity: 1; }
+
+.btn-ghost    { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+.btn-ghost:hover { border-color: var(--purple); color: var(--purple); opacity: 1; }
+
+[data-theme="dark"] .btn-light {
+  background: #252945;
+  color: #DFE3FA;
+}
+[data-theme="dark"] .btn-light:hover {
+  background: var(--card);
+}
