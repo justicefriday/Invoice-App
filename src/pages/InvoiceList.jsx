@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { InvoiceContext } from "../context/InvoiceContext";
 import InvoiceCard from "../components/InvoiceCard";
 import InvoiceForm from "../components/InvoiceForm";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/SideBar";
 
 // ── Filter dropdown component ──
 const FilterDropdown = ({ selected, onChange }) => {
