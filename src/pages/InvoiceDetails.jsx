@@ -4,7 +4,7 @@ import { InvoiceContext } from "../context/InvoiceContext";
 import StatusBadge from "../components/StatusBadge";
 import Modal from "../components/Modal";
 import InvoiceForm from "../components/InvoiceForm";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/SideBar";
 
 const InvoiceDetails = () => {
   const { id } = useParams();
