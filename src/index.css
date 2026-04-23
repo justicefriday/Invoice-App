@@ -580,7 +580,7 @@ html, body {
   background: var(--bg-2);
   border-radius: 8px 8px 0 0;
   padding: 32px;
-  min-width: 480px;   /* forces scroll on tiny screens rather than breaking layout */
+  min-width: 480px;   
 }
 
 [data-theme="dark"] .items-table { background: #252945; }
@@ -620,9 +620,7 @@ html, body {
 .items-total-label  { font-size: 12px; }
 .items-total-amount { font-size: 24px; font-weight: 700; }
 
-/* ============================================================
-   FORM OVERLAY + SLIDE-IN DRAWER
-   ============================================================ */
+
 .form-overlay {
   position: fixed;
   inset: 0;
@@ -633,7 +631,7 @@ html, body {
 .invoice-form {
   position: fixed;
   top: 0;
-  left: 80px;   /* starts after the sidebar */
+  left: 80px;   
   bottom: 0;
   width: min(620px, calc(100vw - 80px));
   background: var(--bg);
@@ -648,11 +646,11 @@ html, body {
 
 .invoice-form h2 { font-size: 24px; font-weight: 700; }
 
-/* Tablet: sidebar becomes top bar so form starts at left: 0 */
+/* tablet */
 @media (max-width: 768px) {
   .invoice-form {
     left: 0;
-    top: 72px;  /* below the sticky top-bar sidebar */
+    top: 72px;  
     width: 100vw;
     border-radius: 0;
     padding: 32px 24px 32px;
@@ -732,7 +730,7 @@ html, body {
   .form-grid-2 { grid-template-columns: 1fr; }
 }
 
-/* ── Item rows ── */
+
 .items-list-header {
   display: grid;
   grid-template-columns: 3fr 1fr 2fr 32px;
@@ -750,16 +748,16 @@ html, body {
   margin-bottom: 16px;
 }
 
-/* On narrow screens: stack item rows into 2-col */
+/* On narrow screens: stack item rows in 2col */
 @media (max-width: 480px) {
-  .items-list-header { display: none; }   /* hide header on mobile */
+  .items-list-header { display: none; }   
   .item-row {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     gap: 8px;
   }
   .item-row input:first-child {
-    grid-column: 1 / -1;  /* item name spans full width */
+    grid-column: 1 / -1;  
   }
 }
 
@@ -814,9 +812,7 @@ html, body {
   }
 }
 
-/* ============================================================
-   DELETE MODAL
-   ============================================================ */
+/* modal delete */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -844,19 +840,27 @@ html, body {
 .modal-box p  { color: var(--text-muted); line-height: 1.8; margin-bottom: 32px; }
 .modal-actions { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
 
-/* ============================================================
-   SIDEBAR RESPONSIVE  (becomes top bar below 768px)
-   ============================================================ */
+/* siDEBar */
+
 @media (max-width: 768px) {
-  .sidebar {
+   .sidebar {
     width: 100%;
     height: 72px;
     flex-direction: row;
     border-radius: 0;
-    position: sticky;
+
+    position: fixed;   
     top: 0;
-    z-index: 50;
+    left: 0;
+    right: 0;
+    bottom: auto;      
   }
+
+  .main-content {
+    margin-left: 0;
+    margin-top: 72px; 
+  }
+  
   .sidebar-logo {
     width: 72px;
     height: 72px;

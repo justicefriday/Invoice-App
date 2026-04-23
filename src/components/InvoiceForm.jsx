@@ -106,7 +106,7 @@ const InvoiceForm = ({ onClose, editData }) => {
   return Object.keys(e).length === 0;
 };
 
-  // Build final invoice object 
+ 
   const buildInvoice = (status) => ({
     ...form,
     id:         editData?.id || makeId(),
@@ -134,7 +134,7 @@ const InvoiceForm = ({ onClose, editData }) => {
 
   return (
     <>
-      {/* Dark overlay behind the drawer */}
+   
       <div className="form-overlay" onClick={onClose} />
 
       {/* Slide-in drawer */}
@@ -174,7 +174,7 @@ const InvoiceForm = ({ onClose, editData }) => {
           </div>
         </section>
 
-        {/* ── BILL TO ───────────────────────────── */}
+      
         <section>
           <p className="form-section-title">Bill To</p>
 
@@ -217,7 +217,7 @@ const InvoiceForm = ({ onClose, editData }) => {
           </div>
         </section>
 
-        {/* ── DATES & DESCRIPTION ───────────────── */}
+        {/* ── DATES & DESCRIPTion */}
         <section>
           <div className="form-grid-2">
             <Field label="Invoice Date" error={errors.createdAt}>
@@ -253,7 +253,7 @@ const InvoiceForm = ({ onClose, editData }) => {
           </Field>
         </section>
 
-        {/* ── ITEM LIST ─────────────────────────── */}
+        {/* ── ITEM LISt*/}
         <section>
           <h3 style={{ fontSize: "18px", fontWeight: 700, color: "#777F98", marginBottom: "16px" }}>
             Item List
@@ -263,7 +263,7 @@ const InvoiceForm = ({ onClose, editData }) => {
             <p className="error-msg" style={{ marginBottom: "12px" }}>{errors.items}</p>
           )}
 
-          {/* Column headers — only show if there are items */}
+          {/* Column headers }
           {form.items.length > 0 && (
             <div className="items-list-header">
               <span>Item Name</span>
@@ -332,7 +332,7 @@ const InvoiceForm = ({ onClose, editData }) => {
           </button>
         </section>
 
-        {/* ── FORM ACTIONS ──────────────────────── */}
+        {/* ── FORM ACTIONS */}
         <div className="form-actions">
           {/* Discard / Cancel */}
           <button type="button" className="btn-cancel" onClick={onClose}>
