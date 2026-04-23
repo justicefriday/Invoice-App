@@ -1,28 +1,38 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { InvoiceContext } from "../context/InvoiceContext";
 import InvoiceCard from "../components/InvoiceCard";
 import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
 
 const Home = () => {
   const { invoices } = useContext(InvoiceContext);
+  const [filter, setFilter] = useState("All");
+
+  const filtered =
+    filter === "All"
+      ? invoices
+      : invoices.filter((inv) => inv.status === filter);
 
   return (
-    <main className="app">
-      <Header />
+    <div className="app-layout">
+      <Sidebar />
 
-      <section className="invoice-list">
-        {invoices.length === 0 ? (
-          <p>No invoices yet</p>
-        ) : (
-                 invoices.map((invoice) => (
-                          
-            <InvoiceCard key={invoice.id} invoice={invoice} />
-          ))
-        )}
-      </section>
-    </main>
+          <main className="main-content">
+              
+        <Header setFilter={setFilter} />
+
+        <section className="invoice-list">
+          {filtered.length === 0 ? (
+            <p>No invoices found</p>
+          ) : (
+            filtered.map((inv) => (
+              <InvoiceCard key={inv.id} invoice={inv} />
+            ))
+          )}
+        </section>
+      </main>
+    </div>
   );
 };
 
 export default Home;
-

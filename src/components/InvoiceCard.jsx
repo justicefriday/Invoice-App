@@ -1,59 +1,40 @@
-import { useState } from "react";
-import InvoiceForm from "./InvoiceForm";
-import { useContext } from "react";
-import { InvoiceContext } from "../context/InvoiceContext";
+import { useNavigate } from "react-router-dom";
 import StatusBadge from "./StatusBadge";
+
 const InvoiceCard = ({ invoice }) => {
-  const { deleteInvoice, updateInvoice } = useContext(InvoiceContext);
-
-    const [openEdit, setOpenEdit] = useState(false);
-    
-    const handleMarkAsPaid = () => {
-    if (invoice.status === "Paid") return;
-
-    updateInvoice({
-      ...invoice,
-      status: "Paid",
-    });
-  };
-
+  const navigate = useNavigate();
 
   return (
-       <article className="invoice-card">
+    <article
+      className="invoice-card"
+      onClick={() => navigate(`/invoice/${invoice.id}`)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && navigate(`/invoice/${invoice.id}`)}
+      aria-label={`View invoice ${invoice.id}`}
+    >
+      <span className="invoice-id">
+        <span>#</span>{invoice.id}
+      </span>
 
-      <h3>#{invoice.id}</h3>
-      <p>{invoice.clientName}</p>
-      <p>Due {invoice.paymentDue}</p>
-      <strong>₦{invoice.amount}</strong>
+      <span className="invoice-due">
+        Due {invoice.paymentDue}
+      </span>
 
-      <StatusBadge status={invoice.status} />
+      <span className="invoice-client">
+        {invoice.clientName}
+      </span>
 
-      <div className="actions">
+      <span className="invoice-amount">
+        ₦{Number(invoice.total || invoice.amount || 0)
+            .toLocaleString("en-GB", { minimumFractionDigits: 2 })}
+      </span>
 
-        <button onClick={() => setOpenEdit(true)}>
-          Edit
-        </button>
+      <span className="invoice-status">
+        <StatusBadge status={invoice.status} />
+      </span>
 
-        <button onClick={() => deleteInvoice(invoice.id)}>
-          Delete
-        </button>
-
-        {/* ONLY SHOW IF NOT PAID */}
-        {invoice.status !== "Paid" && (
-          <button onClick={handleMarkAsPaid}>
-            Mark as Paid
-          </button>
-        )}
-
-      </div>
-
-      {openEdit && (
-        <InvoiceForm
-          editData={invoice}
-          onClose={() => setOpenEdit(false)}
-        />
-      )}
-
+      <span className="card-arrow" aria-hidden="true">›</span>
     </article>
   );
 };
