@@ -4,14 +4,17 @@ import StatusBadge from "./StatusBadge";
 const InvoiceCard = ({ invoice }) => {
   const navigate = useNavigate();
 
+
   return (
     <article
       className="invoice-card"
       onClick={() => navigate(`/invoice/${invoice.id}`)}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && navigate(`/invoice/${invoice.id}`)}
-      aria-label={`View invoice ${invoice.id}`}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") navigate(`/invoice/${invoice.id}`);
+      }}
+      aria-label={`Open invoice ${invoice.id}`}
     >
       <span className="invoice-id">
         <span>#</span>{invoice.id}

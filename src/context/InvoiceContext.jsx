@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 
 export const InvoiceContext = createContext();
 
-// Seed invoices shown on first load (when localStorage is empty)
+// Seed invoices to be shown we emPty
 const SEED = [
   {
     id: "XM9141",

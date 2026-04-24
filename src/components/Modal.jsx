@@ -1,22 +1,37 @@
 import { useEffect } from "react";
 
 const Modal = ({ isOpen, onClose, onConfirm, invoiceId }) => {
-  // Close on ESC key
+
+  // to foCus ESC key handler
   useEffect(() => {
-  if (!isOpen) return;
-  const modal = document.querySelector('[role="dialog"]');
-  const focusable = modal.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])');
-  const first = focusable[0];
-  const last  = focusable[focusable.length - 1];
-  const trap  = (e) => {
-    if (e.key !== "Tab") return;
-    if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
-    else            { if (document.activeElement === last)  { e.preventDefault(); first.focus(); } }
-  };
-  document.addEventListener("keydown", trap);
-  first?.focus();
-  return () => document.removeEventListener("keydown", trap);
-}, [isOpen]);
+    if (!isOpen) return;
+
+    const modal = document.querySelector('[role="dialog"]');
+    const focusable = modal.querySelectorAll(
+      'button, [href], input, [tabindex]:not([tabindex="-1"])'
+    );
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+
+    const trap = (e) => {
+      if (e.key === "Escape") { onClose(); return; }
+      if (e.key !== "Tab") return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+
+    document.addEventListener("keydown", trap);
+    first?.focus();
+
+    return () => document.removeEventListener("keydown", trap);
+  }, [isOpen, onClose]);
+
+  
+  if (!isOpen) return null;
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div
